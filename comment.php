@@ -5,7 +5,7 @@ $id = $_POST['articulo_id'];
 try{
     
     $mongodb = new Mongo();
-    $articleCollection = $mongodb->miblog->articles;
+    $articleCollection = $mongodb->blogphp->articulo;
 
 } catch (MongoConnectionException $e) {
     

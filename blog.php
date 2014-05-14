@@ -23,7 +23,7 @@ $article = $collection->findOne(array('_id' => new MongoId($id)));
                 <p><?php echo $article['contenido']; ?></p>
                 <div id="comment-section">
                     <h2>Commentarios</h2>
-                    <?php if (!empty($article['comentarios'])): ?>
+                    <?php if (!empty($article['comentario'])): ?>
                         <h3>Comments</h3>
                         <?php foreach ($article['comentario'] as $comment):/* echo $comment['name'] . ' says...'; */?>
                             <p><?php echo $comment['texto']; ?></p>
