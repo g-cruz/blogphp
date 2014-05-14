@@ -37,7 +37,7 @@ $cursor->sort(array('fecha' => -1))->skip($skip)->limit($articlesPerPage);
     <body>
         <div id="contentarea">
             <div id="innercontentarea">
-                <h1>Panel de Control</h1>
+                <h1>Entradas</h1>
                 <table class="articles" cellspacing="0" cellpadding="0">
                     <thead>
                         <tr>
@@ -56,9 +56,9 @@ $cursor->sort(array('fecha' => -1))->skip($skip)->limit($articlesPerPage);
                                     <?php print date('g:i a, F j', $article['fecha']->sec); ?>
                                 </td>
                                 <td>
-                                    <a href="blog.php?id=<?php echo $article['_id']; ?>">
+<!--                                    <a href="blog.php?id=<?php //echo $article['_id']; ?>">
                                         Ver
-                                    </a>
+                                    </a>-->
                                     | <a href="edit.php?id=<?php echo $article['_id']; ?>">
                                         Editar
                                     </a>

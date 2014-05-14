@@ -41,6 +41,8 @@ $article = $collection->findOne(array('_id' => new MongoId($id)));
                         <span class="input-label">Email</span>
                         <input type="text" name="commenter_email" class="comment-input"/>
                         <br/><br/>-->
+                        <input type="text" name="autor" class="comment-input" style="width: 80%;" />
+                        <br />
                         <textarea name="texto" rows="5"></textarea><br/><br/>
                         <input type="hidden" name="articulo_id" value="<?php echo $article['_id']; ?>"/>
                         <input type="submit" name="btn_submit" value="Salvar"/>

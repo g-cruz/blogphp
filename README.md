@@ -1,4 +1,3 @@
-blogphp
 =======
 
-Proyecto Blog
+Proyecto Blog Integracion

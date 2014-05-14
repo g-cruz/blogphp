@@ -20,14 +20,15 @@ $comment = array(
                     /*'name' => $_POST['commenter_name'], 
                     'email' => $_POST['commenter_email'],*/
                     'texto' => $_POST['texto'],
-                    'fecha' => new MongoDate()
+                    'fecha' => new MongoDate(),
+                    'autor' => $_POST['autor']
                 );
                 
 array_push($comments, $comment);
 
 $articleCollection->update(array('_id' => new MongoId($id)), array('$set' => array('comentario' => $comments)));
 
-header('Location: blog.php?id='.$id);
+header('Location: post.php?id='.$id);
 
 /* Consultar documento embebido por el método de subobjetos.
  * $usuarios->find(array('direccion' => array('ciudad' => 'Alcamuz', 'provincia' => 'Murcia'))) ;
