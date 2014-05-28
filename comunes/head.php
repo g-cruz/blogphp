@@ -5,4 +5,5 @@
         <title>Blog Artista</title>
         <link rel="stylesheet" type="text/css" href="css/style2.css" />
         <link rel="shortcut icon" href="css/images/artista.png" />
+        <script type="text/javascript" src="js/jquery.js"></script>
     </head>
