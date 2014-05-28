@@ -44,8 +44,7 @@ include 'comunes/head.php';
                         <li><a href="blogpost.php">Crear Entrada</a></li>
                         <li><a href="dashboard.php">Ver Entradas</a></li>
                     <?php } ?>
-                    <li><a href="logout.php">Cerrar Sesión</a></li>
-                   
+                    <li><a href="logout.php">Cerrar Sesión</a></li
                 </ul>
                 <span style="margin-top: 20px;margin-right: 520px; float: right;"><b><?php echo $user->nombre; ?></b></span>
             </div>
