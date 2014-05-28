@@ -1,4 +1,13 @@
 <?php
+require('session.php');
+require('user.php');
+
+$user = new User();
+
+if (!$user->isLoggedIn()){
+    header('location: login.php');
+    exit;
+}
 include './utilidades/util.php';
 $id = $_GET['id'];
 try {
@@ -31,7 +40,9 @@ include 'comunes/head.php';
             <div id="menu">
                 <ul>                                                                       
                     <li class="selected"><a href="index.php">Inicio</a></li>
-                    <li><a href="blogpost.php">Musica</a></li>
+                    <li><a href="blogpost.php">Crear Entrada</a></li>
+                    <li><a href="dashboard.php">Ver Entradas</a></li>
+                    <li><a href="logout.php">Cerrar Sesión</a></li>
                 </ul>
             </div>
         </div><!-- END MENU -->

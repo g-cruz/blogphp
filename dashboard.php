@@ -1,4 +1,14 @@
 <?php
+require('session.php');
+require('user.php');
+
+$user = new User();
+
+if (!$user->isLoggedIn()){
+    header('location: login.php');
+    exit;
+}
+
 try {
     $mongodb = new Mongo();
     $articleCollection = $mongodb->blogphp->articulo;
@@ -48,6 +58,8 @@ $cursor->sort(array('fecha' => -1))->skip($skip)->limit($articlesPerPage);
                     <li><a href="index.php">Inicio</a></li>
                     <li><a href="blogpost.php">Crear Entrada</a></li>
                     <li class="selected"><a href="dashboard.php">Ver Entradas</a></li>
+                    <li><a href="logout.php">Cerrar Sesión</a></li>
+                    <li style="float: right;"></li>
                 </ul>
             </div>
         </div><!-- END MENU -->

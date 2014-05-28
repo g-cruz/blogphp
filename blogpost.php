@@ -1,4 +1,14 @@
 <?php
+require('session.php');
+require('user.php');
+
+$user = new User();
+
+if (!$user->isLoggedIn()){
+    header('location: login.php');
+    exit;
+}
+
 include './utilidades/util.php';
 $action = (!empty($_POST['btn_submit']) && ($_POST['btn_submit'] === 'Salvar')) ? 'save_article' : 'show_form';
 switch ($action) {
@@ -77,6 +87,7 @@ include 'comunes/head.php';
                     <li><a href="index.php">Inicio</a></li>
                     <li class="selected"><a href="blogpost.php">Crear Entrada</a></li>
                     <li><a href="dashboard.php">Ver Entradas</a></li>
+                    <li><a href="logout.php">Cerrar Sesión</a></li>
                 </ul>
             </div>
         </div><!-- END MENU -->

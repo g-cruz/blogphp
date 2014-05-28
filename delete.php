@@ -1,4 +1,14 @@
 <?php
+require('session.php');
+require('user.php');
+
+$user = new User();
+
+if (!$user->isLoggedIn()){
+    header('location: login.php');
+    exit;
+}
+
 $id = $_GET['id'];
 try {
     $mongodb = new Mongo();
