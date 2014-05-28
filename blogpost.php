@@ -1,4 +1,5 @@
 <?php
+include './utilidades/util.php';
 $action = (!empty($_POST['btn_submit']) && ($_POST['btn_submit'] === 'Salvar')) ? 'save_article' : 'show_form';
 switch ($action) {
     case 'save_article':
@@ -14,6 +15,15 @@ switch ($action) {
             $article['titulo'] = $_POST['titulo'];
             $article['contenido'] = $_POST['contenido'];
             $article['fecha'] = new MongoDate();
+            //$article['fecha'] = new MongoDate(strtotime("2013-01-15 00:00:00"));
+            
+            $vfecha = date('Y-m-d H:i:s', $article['fecha']->sec);
+            $article['anio'] = _anio($vfecha);
+            $article['mes'] = _mes($vfecha);
+            $article['dia'] = _diaN($vfecha);
+            
+            //$article['estado'] = 1;
+            
             $collection->insert($article);
         } catch (MongoConnectionException $e) {
             die("No se ha podido conectar a la base de datos " . $e->getMessage());
@@ -51,15 +61,28 @@ switch ($action) {
     default:
 }
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-        <link rel="stylesheet" href="style.css"/>
-        <title>Creador de Entradas</title>
-    </head>
-    <body>
-        <div id="contentarea">
+
+<?php
+include 'comunes/head.php';
+?>
+<body>
+
+    <div id="wrap">
+        <!-- MENU -->
+        <div class="header">
+            <div class="logo"><a href="index.php"><img src="images/logo.gif" alt="" title="" border="0" /></a></div>
+            <div style="margin-right: 20px;float: right;"><img src="images/icon2_h.png" alt="" title="" border="0" /></div>
+            <div id="menu">
+                <ul>                                                                       
+                    <li><a href="index.php">Inicio</a></li>
+                    <li class="selected"><a href="blogpost.php">Crear Entrada</a></li>
+                    <li><a href="dashboard.php">Ver Entradas</a></li>
+                </ul>
+            </div>
+        </div><!-- END MENU -->
+        
+        <div class="center_content">
+             <div id="contentarea">
             <div id="innercontentarea">
                 <h1>Crear Entrada</h1>
                 <?php if ($action === 'show_form'): ?>
@@ -76,12 +99,20 @@ switch ($action) {
                     </form>
                 <?php else: ?>
                     <p>
-                        Art&iacute;culo salvado. _id:<?php echo $article['_id']; ?>.
+                        Art&iacute;culo salvado.
                         <a href="blogpost.php"> &iquest;Escribir otro?</a>
                     </p>
                 <?php endif; ?>
                 <br />
             </div>
         </div>
-    </body>
+
+            <div class="clear"></div>
+        </div><!--end of center content-->
+
+        <?php
+        include 'comunes/footer.php';
+        ?>
+    </div>
+</body>
 </html>

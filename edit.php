@@ -1,5 +1,6 @@
 <?php
-$action = (!empty($_POST['btn_submit']) && ($_POST['btn_submit'] === 'Save')) ? 'save_article' : 'show_form';
+include './utilidades/util.php';
+$action = (!empty($_POST['btn_submit']) && ($_POST['btn_submit'] === 'Salvar')) ? 'save_article' : 'show_form';
 $id = $_REQUEST['id'];
 try {
     $mongodb = new Mongo();
@@ -13,6 +14,11 @@ switch ($action) {
         $article['titulo'] = $_POST['titulo'];
         $article['contenido'] = $_POST['contenido'];
         $article['fecha'] = new MongoDate();
+        
+        $vfecha = date('Y-m-d H:i:s', $article['fecha']->sec);
+        $article['anio'] = _anio($vfecha);
+        $article['mes'] = _mes($vfecha);
+        $article['dia'] = _diaN($vfecha);
         $articleCollection->update(array('_id' => new MongoId($id)), $article);
         /* argumentos opcionales:
          * $collection->update($criteria, $newobj, array('safe' => True));
@@ -49,15 +55,28 @@ switch ($action) {
         $article = $articleCollection->findOne(array('_id' => new MongoId($id)));
 }
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-        <link rel="stylesheet" href="style.css" />
-        <title>Editar Entrada</title>
-    </head>
-    <body>
-        <div id="contentarea">
+
+<?php
+include 'comunes/head.php';
+?>
+<body>
+
+    <div id="wrap">
+        <!-- MENU -->
+        <div class="header">
+            <div class="logo"><a href="index.php"><img src="images/logo.gif" alt="" title="" border="0" /></a></div>
+            <div style="margin-right: 20px;float: right;"><img src="images/icon2_h.png" alt="" title="" border="0" /></div>
+            <div id="menu">
+                <ul>                                                                       
+                    <li ><a href="index.php">Inicio</a></li>
+                    <li><a href="blogpost.php">Crear Entrada</a></li>
+                    <li class="selected"><a href="dashboard.php">Ver Entradas</a></li>
+                </ul>
+            </div>
+        </div><!-- END MENU -->
+        
+        <div class="center_content">
+            <div id="contentarea">
             <div id="innercontentarea">
                 <h1>Editar Entrada</h1>
                 <?php if ($action === 'show_form'): ?>
@@ -75,13 +94,21 @@ switch ($action) {
                     </form>
                 <?php else: ?>
                     <p>
-                        Articulo salvado. _id: <?php echo $id; ?>.
-                        <a href="blog.php?id=<?php echo $id; ?>">
-                            Read it.
+                        Articulo salvado.
+                        <a href="post.php?id=<?php echo $id; ?>">
+                            Leer Entrada.
                         </a>
                     </p>
                 <?php endif; ?>
             </div>
         </div>
-    </body>
+
+            <div class="clear"></div>
+        </div><!--end of center content-->
+
+        <?php
+        include 'comunes/footer.php';
+        ?>
+    </div>
+</body>
 </html>

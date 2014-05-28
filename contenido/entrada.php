@@ -9,7 +9,7 @@
                 <div class="prod_title">
                     <?php
                     $date = date('Y-m-d H:i:s', $article['fecha']->sec);
-                    echo strtoupper(_diaN($date) . ", " . date('d', strtotime($date)) . " de " . _mes($date) . " de " . _anio($date));
+                    echo strtoupper($article['dia'] . ", " . date('d', strtotime($date)) . " de " . $article['mes'] . " de " . $article['anio']);
                     ?>
                 </div>
                 <hr>
@@ -24,7 +24,7 @@
                             <span>
                                 <?php 
                                 $date = date('Y-m-d H:i:s', $comment['fecha']->sec);
-                                echo strtolower("<b>".$comment['autor']."</b> ".date('d', strtotime($date)) . " de " . _mes($date) . " de " . _anio($date).", ".date('g:i a', $comment['fecha']->sec)); 
+                                echo strtolower("<b>".$comment['autor']."</b> ".date('d', strtotime($date)) . " de " . $article['mes'] . " de " . $article['anio'].", ".date('g:i a', $comment['fecha']->sec)); 
                                 ?>
                             </span>
                             <p><?php echo $comment['texto']; ?></p>

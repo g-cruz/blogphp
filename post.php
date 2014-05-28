@@ -9,6 +9,13 @@ try {
     die("Failed to connect to database " . $e->getMessage());
 }
 $cursor = $collection->find();
+
+$cursor2 = $collection->group(
+        array("anio" => 1),
+        array("items" => array()),
+        "function (obj, prev) { prev.items.push(obj.name); }"
+        );
+
 $count=$cursor->count();
 $article = $collection->findOne(array('_id' => new MongoId($id)));
 ?>
@@ -24,7 +31,7 @@ include 'comunes/head.php';
             <div id="menu">
                 <ul>                                                                       
                     <li class="selected"><a href="index.php">Inicio</a></li>
-                    <li><a href="#">Musica</a></li>
+                    <li><a href="blogpost.php">Musica</a></li>
                 </ul>
             </div>
         </div><!-- END MENU -->

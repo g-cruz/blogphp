@@ -17,9 +17,11 @@ $cursor->sort(array('fecha' => -1))->skip($skip)->limit($articlesPerPage);
     "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-        <title>Dashboard</title>
-        <link rel="stylesheet" href="style.css"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>Blog Artista</title>
+        <link rel="stylesheet" type="text/css" href="css/style2.css" />
+        <link rel="shortcut icon" href="css/images/artista.png" />
+        <script type="text/javascript" src="js/jquery.js"></script>
         <style type="text/css" media="screen">
             body { font-size: 13px; }
             div#contentarea { width : 650px; }
@@ -35,7 +37,23 @@ $cursor->sort(array('fecha' => -1))->skip($skip)->limit($articlesPerPage);
         </script>
     </head>
     <body>
-        <div id="contentarea">
+
+    <div id="wrap">
+        <!-- MENU -->
+        <div class="header">
+            <div class="logo"><a href="index.php"><img src="images/logo.gif" alt="" title="" border="0" /></a></div>
+            <div style="margin-right: 20px;float: right;"><img src="images/icon2_h.png" alt="" title="" border="0" /></div>
+            <div id="menu">
+                <ul>                                                                       
+                    <li><a href="index.php">Inicio</a></li>
+                    <li><a href="blogpost.php">Crear Entrada</a></li>
+                    <li class="selected"><a href="dashboard.php">Ver Entradas</a></li>
+                </ul>
+            </div>
+        </div><!-- END MENU -->
+        
+        <div class="center_content">
+            <div id="contentarea">
             <div id="innercontentarea">
                 <h1>Entradas</h1>
                 <table class="articles" cellspacing="0" cellpadding="0">
@@ -93,5 +111,14 @@ $cursor->sort(array('fecha' => -1))->skip($skip)->limit($articlesPerPage);
             </div>
             <br />
         </div>
-    </body>
+
+            <div class="clear"></div>
+        </div><!--end of center content-->
+
+        <?php
+        include 'comunes/footer.php';
+        ?>
+    </div>
+</body> 
 </html>
+

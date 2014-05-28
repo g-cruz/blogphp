@@ -1,5 +1,4 @@
 <?php
-include './utilidades/util.php';
 try {
     $connection = new Mongo();
     $database = $connection->selectDB('blogphp');
@@ -8,8 +7,15 @@ try {
     die("Fallo en la conexión a la base de datos " . $e->getMessage());
 }
 $cursor = $collection->find();
+$cursor2 = $collection->group(
+        array("anio" => 1),
+        array("items" => array()),
+        "function (obj, prev) { prev.items.push(obj.name); }"
+        );
 $count=$cursor->count();
 $cursor->sort(array('fecha'=> -1));
+//$cursor2->sort(array('fecha'=> -1));
+
 ?>
 <?php
 include 'comunes/head.php';
@@ -24,7 +30,8 @@ include 'comunes/head.php';
             <div id="menu">
                 <ul>                                                                       
                     <li class="selected"><a href="index.php">Inicio</a></li>
-                    <li><a href="#">Musica</a></li>
+                    <li><a href="blogpost.php">Crear Entrada</a></li>
+                    <li><a href="dashboard.php">Ver Entradas</a></li>
                 </ul>
             </div>
         </div><!-- END MENU -->
